@@ -1,0 +1,106 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Plant Heartbeat Diagram</title>
+
+  <!-- Fonts: one rough “handwritten”, one clean UI -->
+  <link href="https://fonts.googleapis.com/css2?family=Patrick+Hand&family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+
+  <script src="d3.min.js"></script>
+  <script src="p5.min.js"></script>
+
+  <link rel="stylesheet" href="Viz.css" />
+</head>
+<body>
+  <div class="page">
+    <!-- Top text like the sketch -->
+    <header class="page-header">
+      <h1 class="title">Plant Heartbeat Diagram</h1>
+      <div class="subtitle handwritten">
+        CLICK TO WATER OUR HEART
+      </div>
+    </header>
+
+    <main class="diagram-layout">
+      <!-- LEFT COLUMN: can + heart -->
+      <section class="left-panel">
+        <div class="water">
+          <img id="waterImg" src="water.png" />
+        </div>
+
+        <img id="heartImg" class="heart-img" src="plantheart.png" />
+
+        <!-- Optional labels for plant names near the heart -->
+        <div class="plant-label plant-label-top handwritten">
+          PLANT<br>NAME
+        </div>
+        <div class="plant-label plant-label-bottom handwritten">
+          PLANT<br>NAME
+        </div>
+      </section>
+
+      <!-- MIDDLE: SVG heartbeat lines -->
+      <section class="graph-panel" aria-label="Plant heartbeat diagram">
+        <div id="svgRoot" class="svg-container"></div>
+
+        <!-- Benefit headings above the graph -->
+        <div class="benefit-headings handwritten" id="benefitHeadings"></div>
+      </section>
+
+      <!-- BOTTOM-RIGHT LEGEND LIKE THE DRAWING -->
+      <aside class="legend-panel" id="indexBox">
+        <div class="legend-inner">
+          <div class="legend-title handwritten">INDEX</div>
+
+          <div class="legend-row legend-colors">
+            <div class="legend-item">
+              <div class="color-box color-herb"></div>
+              <span class="legend-label handwritten">TREE</span>
+            </div>
+            <div class="legend-item">
+              <div class="color-box color-shrub"></div>
+              <span class="legend-label handwritten">SHRUB</span>
+            </div>
+            <div class="legend-item">
+              <div class="color-box color-tree"></div>
+              <span class="legend-label handwritten">HERB</span>
+            </div>
+          </div>
+
+          <div class="legend-row">
+            <div class="legend-caption handwritten">OPACITY</div>
+            <div class="legend-note handwritten">0% &nbsp;⟶&nbsp; 100%</div>
+            <div class="legend-note handwritten">smallest &nbsp;⟶&nbsp; largest</div>
+            <div class="legend-caption handwritten">AVG PLANT SIZE</div>
+          </div>
+
+          <div class="legend-row">
+            <div class="legend-caption handwritten">Y-POSITION</div>
+            <div class="legend-note handwritten">bottom &nbsp;⟶&nbsp; top</div>
+            <div class="legend-caption handwritten">H2O NEEDED</div>
+          </div>
+        </div>
+      </aside>
+    </main>
+  </div>
+
+  <script src="Vis.js"></script>
+  <script>
+    // small extra script to put benefit titles above the graph from your benefits array
+    const benefitNames = [
+      "Benefit #1",
+      "Benefit #2",
+      "Benefit #3"
+    ]; // or swap with the real text if you want
+
+    const headings = document.getElementById("benefitHeadings");
+    benefitNames.forEach((b) => {
+      const div = document.createElement("div");
+      div.textContent = b;
+      headings.appendChild(div);
+    });
+  </script>
+</body>
+</html>
