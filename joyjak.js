@@ -59,7 +59,6 @@ function drawLines() {
 drawLines();
 window.addEventListener("resize", drawLines);
 
-<script>
 let canEl;
 let heartEl;
 
