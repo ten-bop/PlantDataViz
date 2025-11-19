@@ -1,4 +1,3 @@
-// ---------------------------- DATA ----------------------------
 let plants = [
   { name:"Carolina Ponyfoot", type:"herb", waterRank:1, sizeRank:1, peaks:["urban landscape","feeds wildlife"] },
   { name:"African Iris", type:"herb", waterRank:2, sizeRank:2, peaks:["signify soil health"] },
