@@ -5,7 +5,6 @@
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Plant Heartbeat Diagram</title>
 
-  <!-- Fonts: one rough “handwritten”, one clean UI -->
   <link href="https://fonts.googleapis.com/css2?family=Patrick+Hand&family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
 
   <script src="d3.min.js"></script>
@@ -16,7 +15,6 @@
 </head>
 <body>
   <div class="page">
-    <!-- Top text like the sketch -->
     <header class="page-header">
       <h1 class="title">Plant Heartbeat Diagram</h1>
       <div class="subtitle handwritten">
@@ -25,7 +23,6 @@
     </header>
 
     <main class="diagram-layout">
-      <!-- LEFT COLUMN: can + heart -->
       <section class="left-panel">
         <div class="water">
           <img id="waterImg" src="water.png" />
@@ -33,28 +30,14 @@
 
         <img id="heartImg" class="heart-img" src="plantheart.png" />
 
-        <!-- Optional labels for plant names near the heart -->
- <!--        <div class="plant-label plant-label-top handwritten">
-          PLANT<br>NAME
-        </div>
-        <div class="plant-label plant-label-bottom handwritten">
-          PLANT<br>NAME
-        </div>
-         <div class="plant-label plant-label-bottom handwritten">
-          PLANT<br>NAME
-        </div> -->
-
-
 
 
       </section>
 
-      <!-- MIDDLE: SVG heartbeat lines -->
       <section class="graph-panel" aria-label="Plant heartbeat diagram">
         <div id="svgRoot" class="svg-container"></div>
   <script src="joyjak.js"></script>
 
-        <!-- Benefit headings above the graph -->
         <div class="benefit-headings handwritten" id="benefitHeadings"></div>
 
         <div class="plant-label handwritten" id="plantDesc"></div>
@@ -66,11 +49,10 @@
   </div>
 
   <script>
-    // small extra script to put benefit titles above the graph from your benefits array
     const benefitNames = [
   "signify soil health","homes wildlife","urban landscape","feeds wildlife",
   "prevents erosion","supports pollinators","filters water"
-    ]; // or swap with the real text if you want
+    ]
 
     const headings = document.getElementById("benefitHeadings");
     benefitNames.forEach((b) => {
@@ -79,7 +61,6 @@
       headings.appendChild(div);
     });
   </script>
-  <!-- BOTTOM-RIGHT LEGEND LIKE THE DRAWING -->
       <aside class="legend-panel" id="indexBox">
         <div class="legend-inner">
           <div class="legend-title handwritten">INDEX</div>
@@ -115,11 +96,11 @@
       </aside>
 
   <script>
-    // small extra script to put benefit titles above the graph from your benefits array
+   
     const plantNames = [
   "Bald Cypress","Pecan Tree","Bradford Pear","Orchid Tree",
   "Common Fig","Common Boxwood","Sprenger's Asparagus Fern","White Panicle Aster","African Iris","Carolina Ponyfoot"
-    ]; // or swap with the real text if you want
+    ]
 
     const plantHeadings = document.getElementById("plantDesc");
     plantNames.forEach((b) => {
