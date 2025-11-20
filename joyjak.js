@@ -26,14 +26,14 @@ function drawLines() {
   let spacing = 50;
 
   let svg = d3.select("#svgRoot")
-    .html("")
+   
     .append("svg")
     .attr("width", width)
     .attr("height", height);
 
   plants.forEach((plant, idx) => {
     let baseY = height - plant.sizeRank * spacing;
-    let opacity = plant.waterRank / 15;
+    let opacity = plant.waterRank / 10;
 
  let points = benefits.map((benefit, i) => {
   let x = 80 + i * (width - 160) / (benefits.length - 1);
@@ -46,7 +46,6 @@ function drawLines() {
 
   return [x, y];
 });
-
 
 
     svg.append("polyline")
@@ -83,13 +82,13 @@ function setup() {
 }
 
 
-function overCan() {
+/*function overCan() {
   let r = canEl.elt.getBoundingClientRect();
   return (mouseX + window.scrollX >= r.left &&
           mouseX + window.scrollX <= r.right &&
           mouseY + window.scrollY >= r.top &&
           mouseY + window.scrollY <= r.bottom);
-}
+}*/
 
 
 function animateCan() {

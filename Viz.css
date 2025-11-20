@@ -155,15 +155,6 @@ html, body {
   transform: translateY(-6px);
 }
 
-svg {
-  width: 100%;
-  height: 100%;
-  display: block;
-}
-
-svg text {
-  font-family: "Inter", system-ui, -apple-system, "Segoe UI", sans-serif;
-}
 
 .legend-panel{
 width:50%;
