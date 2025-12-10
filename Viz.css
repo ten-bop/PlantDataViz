@@ -24,18 +24,8 @@ html, body {
   -webkit-font-smoothing: antialiased;
 }
 
-.page {
-  width: 100%;
-  height: 100%;
-  padding: 16px 20px;
-}
 
 
-.title {
-  margin: 0;
-  font-size: 1.8rem;
-  font-weight: 700;
-}
 
 .subtitle {
   font-size: 1.1rem;
@@ -74,7 +64,6 @@ html, body {
 .water img {
   width: 150px;
   max-width: 40vw;
-  /* transition removed — JS handles animation */
   transform-origin: center center;
 }
 
@@ -84,7 +73,6 @@ html, body {
   left: 3px;
   width: 240px;
   max-width: 40vw;
-  /* transition removed — JS handles animation */
   transform-origin: center center;
 }
 
@@ -97,12 +85,12 @@ html, body {
   padding: 10px 6px 0 6px;
 }
 
-.svg-container {
+/*.svg-container {
   width: 100%;
   height: 100%;
 }
 
-
+*/
 
 .legend-panel{
 width:50%;
