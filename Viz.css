@@ -31,12 +31,6 @@ html, body {
 }
 
 
-.handwritten {
-  font-family: "Patrick Hand", "Comic Sans MS", system-ui, sans-serif;
-  letter-spacing: 0.04em;
-}
-
-
 .title {
   margin: 0;
   font-size: 1.8rem;
@@ -152,7 +146,7 @@ html, body {
 
 .legend-panel{
 width:50%;
-margin-top:100px;
+margin-top:0px;
 margin-left:auto;
 margin-right:90px;}
 

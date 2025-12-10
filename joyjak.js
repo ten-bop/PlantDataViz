@@ -19,9 +19,11 @@ let benefits = [
 
 let colorMap = { herb:"#2f86d0", shrub:"#ff9a3c", tree:"#e34a4a" };
 
-const margin = { top: 40, right: 30, bottom: 60, left: 80 };
-const width = 1000 - margin.left - margin.right;
-const height = 450 - margin.top - margin.bottom;
+const containerWidth = document.getElementById("chart-container").clientWidth;
+
+const margin = { top: 40, right: 40, bottom: 80, left: 170};
+const width = containerWidth - margin.left - margin.right;
+const height = 550 - margin.top - margin.bottom;
 
 d3.select("#chart-container").selectAll("*").remove();
 
@@ -90,6 +92,7 @@ plants.forEach(plant => {
     .attr("stroke-width", 2.6)
     .attr("opacity", opacityScale(plant.waterRank))
     .attr("d", line);
+    
 });
 
 
