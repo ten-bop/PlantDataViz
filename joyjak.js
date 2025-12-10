@@ -50,6 +50,17 @@ svg.append("g")
   .attr("transform", `translate(0,${height})`)
   .call(d3.axisBottom(x));
 
+svg.append("text")
+  .attr("class", "axis-label")
+  .attr("x", width / 2)              // center of X-axis
+  .attr("y", height + margin.bottom - 10) // below the axis
+  .attr("text-anchor", "middle")
+  .style("font-weight", "bold")
+  .style("font-size", "14px")
+  .style("text-decoration", "underline")
+  .text("Benefits");
+
+
 const sizeToName = {};
 plants.forEach(p => sizeToName[p.sizeRank] = p.name);
 
@@ -59,6 +70,18 @@ const yAxis = d3.axisLeft(y)
 
 svg.append("g")
   .call(yAxis);
+
+svg.append("text")
+  .attr("class", "axis-label")
+  .attr("x", -height / 2)           // rotate around center
+  .attr("y", -margin.left + 20)     // shift into view
+  .attr("transform", "rotate(-90)") // rotate text
+  .attr("text-anchor", "middle")
+  .style("font-weight", "bold")
+  .style("font-size", "14px")
+  .style("text-decoration", "underline")
+  .text("Plants");
+ 
 
 plants.forEach(plant => {
 
