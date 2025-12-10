@@ -59,109 +59,63 @@
 
 // drawLines();
 // window.addEventListener("resize", drawLines);
-let plants = [ 
-  { name:"Carolina Ponyfoot", type:"herb", waterRank:1, sizeRank:1, peaks:["urban landscape","feeds wildlife"] },
-  { name:"African Iris", type:"herb", waterRank:3, sizeRank:2, peaks:["signify soil health"] },
-  { name:"White Panicle Aster", type:"herb", waterRank:5, sizeRank:3, peaks:["urban landscape","supports pollinators"] },
-  { name:"Sprenger’s Asparagus Fern", type:"herb", waterRank:10, sizeRank:4, peaks:["homes wildlife","urban landscape","feeds wildlife","prevents erosion"] },
-  { name:"Common Boxwood", type:"shrub", waterRank:8, sizeRank:5, peaks:["homes wildlife","urban landscape"] },
-  { name:"Common Fig", type:"shrub", waterRank:4, sizeRank:6, peaks:["urban landscape","supports pollinators"] },
-  { name:"Orchid Tree", type:"tree", waterRank:1, sizeRank:7, peaks:["prevents erosion","supports pollinators"] },
-  { name:"Bradford Pear", type:"tree", waterRank:4, sizeRank:8, peaks:["urban landscape","prevents erosion"] },
-  { name:"Pecan Tree", type:"tree", waterRank:7, sizeRank:9, peaks:["feeds wildlife","prevents erosion"] },
-  { name:"Bald Cypress", type:"tree", waterRank:10, sizeRank:10, peaks:["homes wildlife","prevents erosion","filters water"] }
-];
+var margin = {top: 10, right: 30, bottom: 30, left: 60},
+    width = 460 - margin.left - margin.right,
+    height = 400 - margin.top - margin.bottom;
 
-let benefits = [
-  "signify soil health","homes wildlife","urban landscape","feeds wildlife",
-  "prevents erosion","supports pollinators","filters water"
-];
+var svg = d3.select("#my_dataviz")
+  .append("svg")
+    .attr("width", width + margin.left + margin.right)
+    .attr("height", height + margin.top + margin.bottom)
+  .append("g")
+    .attr("transform",
+          "translate(" + margin.left + "," + margin.top + ")");
 
-let colorMap = { herb:"blue", shrub:"orange", tree:"red" };
+//Read the data
+d3.csv("https://raw.githubusercontent.com/holtzy/data_to_viz/master/Example_dataset/5_OneCatSevNumOrdered.csv", function(data) {
 
-// -------------------- SETUP --------------------
+  // group the data: I want to draw one line per group
+  var sumstat = d3.nest() // nest function allows to group the calculation per level of a factor
+    .key(function(d) { return d.name;})
+    .entries(data);
 
-const svg = d3.select("svg");
-const width = +svg.attr("width");
-const height = +svg.attr("height");
+  // Add X axis --> it is a date format
+  var x = d3.scaleLinear()
+    .domain(d3.extent(data, function(d) { return d.year; }))
+    .range([ 0, width ]);
+  svg.append("g")
+    .attr("transform", "translate(0," + height + ")")
+    .call(d3.axisBottom(x).ticks(5));
 
-const margin = { top: 40, right: 40, bottom: 120, left: 220 };
-const innerWidth = width - margin.left - margin.right;
-const innerHeight = height - margin.top - margin.bottom;
+  // Add Y axis
+  var y = d3.scaleLinear()
+    .domain([0, d3.max(data, function(d) { return +d.n; })])
+    .range([ height, 0 ]);
+  svg.append("g")
+    .call(d3.axisLeft(y));
 
-const g = svg.append("g")
-  .attr("transform", `translate(${margin.left},${margin.top})`);
+  // color palette
+  var res = sumstat.map(function(d){ return d.key }) // list of group names
+  var color = d3.scaleOrdinal()
+    .domain(res)
+    .range(['#e41a1c','#377eb8','#4daf4a','#984ea3','#ff7f00','#ffff33','#a65628','#f781bf','#999999'])
 
-// -------------------- SCALES --------------------
+  // Draw the line
+  svg.selectAll(".line")
+      .data(sumstat)
+      .enter()
+      .append("path")
+        .attr("fill", "none")
+        .attr("stroke", function(d){ return color(d.key) })
+        .attr("stroke-width", 1.5)
+        .attr("d", function(d){
+          return d3.line()
+            .x(function(d) { return x(d.year); })
+            .y(function(d) { return y(+d.n); })
+            (d.values)
+        })
 
-// X = Benefits
-const xScale = d3.scalePoint()
-  .domain(benefits)
-  .range([0, innerWidth]);
-
-// Y = Tree size (smallest bottom, largest top)
-const yScale = d3.scaleLinear()
-  .domain([1, 10])
-  .range([innerHeight, 0]);
-
-// Opacity = Water Rank (1 = faint, 10 = solid)
-const opacityScale = d3.scaleLinear()
-  .domain([1, 10])
-  .range([0.2, 1]);
-
-// -------------------- AXES --------------------
-
-g.append("g")
-  .attr("transform", `translate(0,${innerHeight})`)
-  .call(d3.axisBottom(xScale))
-  .selectAll("text")
-  .attr("transform", "rotate(-40)")
-  .style("text-anchor", "end");
-
-g.append("g")
-  .call(d3.axisLeft(yScale).ticks(10))
-  .append("text")
-  .attr("y", -20)
-  .attr("fill", "black")
-  .text("Tree Size Rank");
-
-const line = d3.line()
-  .x(d => xScale(d.benefit))
-  .y(d => yScale(d.value))
-  .curve(d3.curveMonotoneX);
-
-
-plants.forEach(plant => {
-
-  let plantData = benefits.map(benefit => {
-    return {
-      benefit: benefit,
-      value: plant.peaks.includes(benefit) ? plant.sizeRank : 0
-    };
-  });
-
-  g.append("path")
-    .datum(plantData)
-    .attr("class", "line")
-    .attr("stroke", colorMap[plant.type])
-    .attr("stroke-opacity", opacityScale(plant.waterRank))
-    .attr("d", line);
-});
-
-// -------------------- TREE NAMES ON Y AXIS --------------------
-
-const treesOnly = plants.filter(p => p.type === "tree");
-
-g.selectAll(".tree-label")
-  .data(treesOnly)
-  .enter()
-  .append("text")
-  .attr("x", -15)
-  .attr("y", d => yScale(d.sizeRank))
-  .attr("dy", "0.35em")
-  .attr("text-anchor", "end")
-  .attr("fill", "black")
-  .text(d => d.name);
+})
 
 let canEl;
 let heartEl;
