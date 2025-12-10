@@ -36,12 +36,6 @@ html, body {
   letter-spacing: 0.04em;
 }
 
-.page-header {
-  display: flex;
-  flex-direction: column;
-  gap: 4px;
-  margin-bottom: 8px;
-}
 
 .title {
   margin: 0;
