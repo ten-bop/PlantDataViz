@@ -31,17 +31,13 @@ html, body {
 
 
 .diagram-layout {
-  position: relative;
   display: grid;
-  grid-template-columns: 220px minmax(0, 1fr);
-  grid-template-rows: minmax(420px, 1fr) 150px;
-  grid-template-areas:
-    "left graph"
-    "legend graph";
+  grid-template-columns: 220px minmax(0, 1fr) 250px; 
+  grid-template-rows: minmax(420px, 1fr);
+  grid-template-areas: "left graph legend";
   gap: 16px;
   height: calc(100% - 60px);
 }
-
 
 .left-panel {
   grid-area: left;
@@ -86,7 +82,7 @@ html, body {
 
 .legend-panel {
   grid-area: legend;
-  margin: 0;     
+  margin: 30px;     
   width: 175px;   
   height: 100%; 
   display: flex;

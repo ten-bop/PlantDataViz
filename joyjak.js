@@ -46,20 +46,36 @@ const svg = d3.select("#chart-container")
   .append("g")
   .attr("transform", `translate(${margin.left},${margin.top})`);
 
-svg.append("g")
+  const xAxis = svg.append("g")
   .attr("transform", `translate(0,${height})`)
   .call(d3.axisBottom(x));
 
+xAxis.selectAll("text")
+  .attr("transform", "rotate(-30)")     
+  .style("text-anchor", "end")        
+
 svg.append("text")
   .attr("class", "axis-label")
-  .attr("x", width / 2)              // center of X-axis
-  .attr("y", height + margin.bottom - 10) // below the axis
+  .attr("x", width / 2)            
+  .attr("y", height + margin.bottom - 10) 
   .attr("text-anchor", "middle")
   .style("font-weight", "bold")
   .style("font-size", "14px")
   .style("text-decoration", "underline")
   .text("Benefits");
 
+svg.selectAll(".x-grid")
+  .data(benefits) 
+  .enter()
+  .append("line")
+  .attr("class", "x-grid")
+  .attr("x1", d => x(d))
+  .attr("x2", d => x(d))
+  .attr("y1", 0)
+  .attr("y2", height)
+  .attr("stroke", "black")  
+  .attr("stroke-opacity", 0.1)
+  .attr("stroke-width", 1);
 
 const sizeToName = {};
 plants.forEach(p => sizeToName[p.sizeRank] = p.name);
@@ -73,9 +89,9 @@ svg.append("g")
 
 svg.append("text")
   .attr("class", "axis-label")
-  .attr("x", -height / 2)           // rotate around center
-  .attr("y", -margin.left + 20)     // shift into view
-  .attr("transform", "rotate(-90)") // rotate text
+  .attr("x", -height / 2)       
+  .attr("y", -margin.left + 20)    
+  .attr("transform", "rotate(-90)")
   .attr("text-anchor", "middle")
   .style("font-weight", "bold")
   .style("font-size", "14px")
