@@ -117,7 +117,7 @@ html, body {
   justify-content: space-between;
   gap:58px;
   font-size: 1rem;
-  pointer-events: none;]
+  pointer-events: none;
 
 }
 
@@ -216,7 +216,7 @@ font-size:0.9rem;
     grid-template-columns: 160px minmax(0, 1fr);
   }
 
-  .waterImg {
+  #waterImg {
     width: 100px;
   }
 

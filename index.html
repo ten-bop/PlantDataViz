@@ -3,7 +3,6 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Plant Heartbeat Diagram</title>
 
   <link href="https://fonts.googleapis.com/css2?family=Patrick+Hand&family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
 
@@ -19,47 +18,33 @@
       <div class="subtitle handwritten">
         CLICK TO WATER OUR HEART
       </div>
-    </header>
+  
 
     <main class="diagram-layout">
-      <section class="left-panel">
-        <div class="water">
-          <img id="waterImg" src="water.png" />
-        </div>
+   <section class="left-panel">
+  <div class="water">
+    <img id="waterImg" src="water.png" />
+  </div>
 
-        <img id="heartImg" class="heart-img" src="plantheart.png" />
+  <img id="heartImg" class="heart-img" src="plantheart.png" />
+</section>
 
+<section class="graph-panel">
+  <div id="chart-container"></div>
+</section>
 
-
-      </section>
-
-      <section class="graph-panel" aria-label="Plant heartbeat diagram">
-        <div id="svgRoot" class="svg-container"></div>
   <script src="joyjak.js"></script>
 
-        <div class="benefit-headings handwritten" id="benefitHeadings"></div>
+       <!--  <div class="benefit-headings handwritten" id="benefitHeadings"></div>
 
         <div class="plant-label handwritten" id="plantDesc"></div>
+         <div id="chart-container"></div> -->
 
-      </section>
 
     
     </main>
   </div>
 
-  <script>
-    const benefitNames = [
-  "signify soil health","homes wildlife","urban landscape","feeds wildlife",
-  "prevents erosion","supports pollinators","filters water"
-    ]
-
-    const headings = document.getElementById("benefitHeadings");
-    benefitNames.forEach((b) => {
-      const div = document.createElement("div");
-      div.textContent = b;
-      headings.appendChild(div);
-    });
-  </script>
       <aside class="legend-panel" id="indexBox">
         <div class="legend-inner">
           <div class="legend-title handwritten">INDEX</div>
@@ -96,21 +81,5 @@
                      </div>
         </div>
       </aside>
-
-  <script>
-   
-    const plantNames = [
-  "Bald Cypress","Pecan Tree","Bradford Pear","Orchid Tree",
-  "Common Fig","Common Boxwood","Sprenger's Asparagus Fern","White Panicle Aster","African Iris","Carolina Ponyfoot"
-    ]
-
-    const plantHeadings = document.getElementById("plantDesc");
-    plantNames.forEach((b) => {
-      const div = document.createElement("div");
-      div.textContent = b;
-      plantHeadings.appendChild(div);
-    });
-  </script>
-
 </body>
 </html>
