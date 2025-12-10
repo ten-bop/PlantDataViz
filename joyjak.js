@@ -92,7 +92,6 @@ plants.forEach(plant => {
     .attr("stroke-width", 2.6)
     .attr("opacity", opacityScale(plant.waterRank))
     .attr("d", line);
-    
 });
 
 
