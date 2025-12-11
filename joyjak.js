@@ -51,7 +51,7 @@ const svg = d3.select("#chart-container")
   .call(d3.axisBottom(x));
 
 xAxis.selectAll("text")
-  .attr("transform", "rotate(-30)")     
+  .attr("transform", "rotate(-45)")     
   .style("text-anchor", "end")        
 
 svg.append("text")
@@ -152,7 +152,7 @@ window.addEventListener("load", () => {
 
 function animateCan(el) {
   el.style.transition = "transform 0.3s ease";
-  el.style.transform = "rotate(45deg)";
+  el.style.transform = "rotate(deg)";
 
   setTimeout(() => {
     el.style.transform = "rotate(0deg)";
